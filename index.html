@@ -95,7 +95,7 @@
     </div>
 
     <div id="formView" class="hidden">
-        <h2>Post New Fiction</h2>
+        <h2>Post New Story</h2>
         <input type="text" id="title" placeholder="Fic Title">
         <input type="text" id="summary" placeholder="Summary">
         <input type="text" id="author" placeholder="Author Name (or leave blank for Anonymous)">
@@ -485,8 +485,9 @@
                 }
             });
 
+            // Validation check to prevent empty / ghost posts
             if (!title || chapters.length === 0) {
-                return alert("Please fill in your Title and at least one Chapter body.");
+                return alert("Please fill in your Title and at least one Chapter body before publishing.");
             }
 
             const payload = { 
