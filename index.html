@@ -96,7 +96,7 @@
 
     <div id="formView" class="hidden">
         <h2>Post New Story</h2>
-        <input type="text" id="title" placeholder="Fic Title">
+        <input type="text" id="title" placeholder="Title">
         <input type="text" id="summary" placeholder="Summary">
         <input type="text" id="author" placeholder="Author Name (or leave blank for Anonymous)">
         
@@ -374,6 +374,7 @@
                 <div class="chapter-toolbar">
                     <button type="button" class="btn btn-alt" onclick="formatText(this, 'b')" style="padding: 2px 8px; font-weight: bold;">B</button>
                     <button type="button" class="btn btn-alt" onclick="formatText(this, 'i')" style="padding: 2px 8px; font-style: italic;">I</button>
+                    <button type="button" class="btn btn-alt" onclick="insertDivider(this)" style="padding: 2px 8px;">* * *</button>
                 </div>
                 <textarea class="chapter-textarea" rows="10" placeholder="Write or paste chapter text here...">${bodyText}</textarea>
             `;
@@ -419,6 +420,18 @@
             textarea.value = textarea.value.substring(0, start) + openTag + selectedText + closeTag + textarea.value.substring(end);
             textarea.focus();
             textarea.setSelectionRange(start + openTag.length, end + openTag.length);
+        }
+
+        function insertDivider(btn) {
+            const box = btn.closest('.chapter-box');
+            const textarea = box.querySelector('.chapter-textarea');
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const divider = "\n\n* * *\n\n";
+
+            textarea.value = textarea.value.substring(0, start) + divider + textarea.value.substring(end);
+            textarea.focus();
+            textarea.setSelectionRange(start + divider.length, start + divider.length);
         }
 
         function renderCommentsList() {
